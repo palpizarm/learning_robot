@@ -1,9 +1,11 @@
-using Motor;
-using Camera;
-using Battery;
+using System;
 
-class Robot {
-    private Motor motor;
-    private Battery battery;
-    private Camera camera;
+namespace learning_robot
+{
+    class Robot
+    {
+        private Motor motor;
+        private Battery battery;
+        private Camera camera;
+    }
 }

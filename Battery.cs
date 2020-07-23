@@ -1,5 +1,10 @@
+using System;
 
-
-class Battery {
-    private int type {set; get;}
+namespace learning_robot
+{
+    class Battery
+    {
+        private int type { set; get; }
+        private float percentage { set; get; }
+    }
 }
