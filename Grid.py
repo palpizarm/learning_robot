@@ -3,9 +3,10 @@ from Square import *
 from Util import *
 
 class Grid:
-
+    
+    
     def __init__(self):
-        grid = []
+        self.grid = []
 
     def createGrid(self, file_name):
         types = [0,NORMAL_GRD_COST,MODERATE_GRD_COST,HARD_GRD_COST,LOCKED_GRD_COST]
@@ -16,5 +17,5 @@ class Grid:
             for column in range(GRD_LENGTH):
                 value = int(data[row][column])
                 elements.append(Square(value,types[value]))
-            grid.append(elements)
+            self.grid.append(elements)
         

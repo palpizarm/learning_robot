@@ -3,5 +3,5 @@
 class Square:
 
     def __init__(self, p_type, p_cost):
-        type = p_type
-        cost = p_cost
+        self.type = p_type
+        self.cost = p_cost

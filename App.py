@@ -3,6 +3,7 @@ import pygame
 import random
 from Util import *
 from Robot import *
+from Grid import *
 
 
 # start algorithm
@@ -78,15 +79,11 @@ def testing():
 
 
 
-
-
-
-
-
-
+# General setting
 robots = []
-robots.append(Robot())
 
+grid = Grid()
+grid.createGrid('grid_1')
 
 
 
@@ -105,8 +102,11 @@ robot_image =  pygame.image.load(r'data/robot.png')
 robot_image = pygame.transform.scale(robot_image,(sprite_size,sprite_size))
 rock_image = pygame.image.load(r'data/rock.png')
 rock_image = pygame.transform.scale(rock_image,(sprite_size,sprite_size))
-ground_image.blit(robot_image, (0,0))
-ground_image.blit(rock_image, (100,100))
+# load rock in map
+for r_count in range(GRD_LENGTH):
+    for c_count in range(GRD_LENGTH):
+        if grid.grid[r_count][c_count].type == LOCKED_GROUND:
+            ground_image.blit(rock_image, (r_count*sprite_size,c_count*sprite_size))
 screen.blit(ground_image,(width-grd_w,25))
 
 # main window
