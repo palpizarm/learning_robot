@@ -23,7 +23,19 @@ MODERATE_GROUND = 2;
 HARD_GROUND = 3;
 LOCKED_GROUND = 4;
 
+# objetive position
+OBJ_X = 20 
+OBJ_Y = 1
 
+# Adaptability values
+MAX_DIST = 19
+
+
+
+# calculate the distance of the robot and objetive point
+# use the chebyshov distance method
+def distance(x1,y1,x2,y2):
+    return max(abs(x2-x1),abs(y2-y1))
 
 # create a grid
 # grid generate = 2

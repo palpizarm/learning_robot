@@ -11,8 +11,20 @@ def init():
     pass
 
 # select the best robots, probabilitic way
-def selection(grades):
-    pass
+def selection(robots):
+    grades = testing(robots)
+    best_robots = []
+    for count in range(len(robots)):
+        # generate random number
+        r = random.uniform(0,1)
+        robot = 0
+        # pick the robot  
+        for index in range(len(grades)):
+            if robot < r < robot + grades[index]:
+                best_robots.append(robots[index])    
+                break
+            robot += grades[index]
+    return best_robots
 
 # takes the selection robots and do the crossing
 def crossing(robots):
@@ -65,17 +77,32 @@ def build_robot(binary_setting):
     setting_type.append(int(value))
     # set behavior
 
+    # select motor, battery and camera and set behavior
 
-    return Robot(setting_type[1],setting_type[0], setting_type[2])
+    # build robot
+    robot = Robot(1,1,1)
+    return robot
+
+# calculate grade for each robot
+def testing(robots):
+    grades = []
+    normalize_grade = []
+    # evalute each robot 
+    for robot in robots:
+    # distance of the objetive, cost and time
+        x1, y1 = robot.get_position()
+        dist = distance(x1, y1, OBJ_X, OBJ_Y)
+        # hacer un forma para calcular en costo con la configuracion del robot
+        cost = 0
+        grades.append(adaptability(dist,cost,robot.time))
+    average = sum(grades)
+    for grade in grades:
+        normalize_grade.append(grade/average)
+    return normalize_grade
 
 # adaptability function
-def testing():
-    pass
-
-
-
-
-
+def adaptability(distance, cost, time):
+    return distance + cost + time
 
 
 
