@@ -14,3 +14,6 @@ class Robot:
 
     def get_posoition(self):
         return (self.x,self.y)
+    
+    def move(self):
+        pass

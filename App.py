@@ -91,19 +91,20 @@ def testing(robots):
     normalize_grade = []
     # evalute each robot 
     for robot in robots:
-    # distance of the objetive, cost and time
-        x1, y1 = robot.get_position()
-        dist = distance(x1, y1, OBJ_X, OBJ_Y)
-        # hacer un forma para calcular en costo con la configuracion del robot
-        cost = 0
-        grades.append(adaptability(dist,cost,robot.time))
-    average = sum(grades)
+        grades.append(adaptability(robot))
+    sum = sum(grades)
     for grade in grades:
-        normalize_grade.append(grade/average)
+        normalize_grade.append(grade/sum)
     return normalize_grade
 
 # adaptability function
-def adaptability(distance, cost, time):
+def adaptability(robot):
+    # distance of the objetive, cost and time
+    x1, y1 = robot.get_position()
+    dist = distance(x1, y1, OBJ_X, OBJ_Y)
+    # hacer un forma para calcular en costo con la configuracion del robot
+    cost = 0
+    time = robot.time
     return distance + cost + time
 
 
