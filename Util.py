@@ -8,6 +8,10 @@ grd_w = 650
 grd_h = 650
 # sprite size
 sprite_size = 32
+# information layout
+VIEW_W = 300
+VIEW_H = 325
+
 
 
 # length of the grid
@@ -30,6 +34,11 @@ OBJ_Y = 1
 # Adaptability values
 MAX_DIST = 19
 
+
+# COLORS
+WHITE = (255,255,255)
+BLACK = (0,0,0)
+BLUE = (0,0,128)
 
 
 # calculate the distance of the robot and objetive point
