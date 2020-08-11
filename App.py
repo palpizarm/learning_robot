@@ -15,7 +15,7 @@ from Battery import *
 def init():
     count = 1
     objetive = False
-    robots = create_robots(6)
+    robots = initial_population(6)
     while(not objetive):
         for robot in robots:
            # do the map travel
@@ -113,7 +113,7 @@ def testing(robots):
     sum = sum(grades)
     for grade in grades:
         normalize_grade.append(grade/sum)
-    return normalize_grade
+    return normalize_grade, sum
 
 # adaptability function
 def adaptability(robot):
@@ -127,7 +127,7 @@ def adaptability(robot):
     return distance + cost + time
 
 # create the first generation 
-def create_robots(lenght):
+def initial_population(lenght):
     robots = []
     for count in range(lenght):
         # select camera type
