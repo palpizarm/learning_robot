@@ -6,11 +6,28 @@ from PIL import Image, ImageDraw, ImageFont
 from Util import *
 from Robot import *
 from Grid import *
+from Camera import *
+from Motor import *
+from Battery import *
 
 
 # start algorithm
 def init():
-    pass
+    count = 1
+    objetive = False
+    robots = create_robots(6)
+    while(not objetive):
+        for robot in robots:
+           # do the map travel
+            pass
+        if objetive == True:
+            break;
+        robot_generations[count] = robots.copy()
+        count += 1
+        best_robot = selection(robots)
+        robots = crossing(best_robot)
+
+
 
 # select the best robots, probabilitic way
 def selection(robots):
@@ -21,7 +38,7 @@ def selection(robots):
         r = random.uniform(0,1)
         robot = 0
         # pick the robot  
-        for index in range(len(grades)):
+        for index in range(len(robots)):
             if robot < r < robot + grades[index]:
                 best_robots.append(robots[index])    
                 break
@@ -79,10 +96,11 @@ def build_robot(binary_setting, parents):
     setting_type.append(int(value))
     # set behavior
 
-    # select motor, battery and camera and set behavior
-
     # build robot
-    robot = Robot(1,1,1, parents)
+    # select motor, battery and camera
+    robot = Robot(Motor(setting_type[1],MOTORS[setting_type[1]]),
+            Camera(setting_type[0],CAMERAS[setting_type[0],0],CAMERAS[setting_type[0],1]),
+            Battery(setting_type[2],BATTERIES[setting_type[2]]),parents)
     return robot
 
 # calculate grade for each robot
@@ -102,15 +120,30 @@ def adaptability(robot):
     # distance of the objetive, cost and time
     x1, y1 = robot.get_position()
     dist = distance(x1, y1, OBJ_X, OBJ_Y)
-    # hacer un forma para calcular en costo con la configuracion del robot
-    cost = 0
-    time = robot.time
+    # calculate the cost of create the robot
+    cost = robot.camera.type + robot.motor.type + robot.battery.type
+    # distance / time
+    time = distance / robot.time
     return distance + cost + time
 
+# create the first generation 
+def create_robots(lenght):
+    robots = []
+    for count in range(lenght):
+        # select camera type
+        c = random.randint(1,3)
+        m = random.randint(1,3)
+        b = random.randint(1,3)
+        robots.append(
+            Robot(Motor(m,MOTORS[m]),
+            Camera(c,CAMERAS[c,0],CAMERAS[c,1]),
+            Battery(b,BATTERIES[b]),
+            None)
+        )
+    return robots
 
 
 # General setting
-robots = []
 robot_generations = dict()
 
 grid = Grid()
